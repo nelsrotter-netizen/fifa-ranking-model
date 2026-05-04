@@ -6,7 +6,11 @@ Research Question:
 Is there a better manner for ranking international teams apart from the traditional FIFA ranking system and is it more effective at predicting games than other AI modeling systems?
 
 Data Sources:
-This project sources data from a dataset compiling every FIFA sanctioned match since 1872. An additional dataset has future games from the 2026 World Cup group stage. 
+This project sources data from a few different datasets:
+  1. dataset compiling every FIFA sanctioned match since 1872
+  2. second dataset contains games from 2022 WC specifically
+  3. third dataset has future games from the 2026 World Cup group stage
+  4. API from the Odds API, can be used for free to pull betting odds from any competitive sports game; odds pulled are from UK markets only
 
 Scripts Used: 
 The repository consists of three separate scripts. 
