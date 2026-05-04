@@ -1,4 +1,4 @@
-Alternative FIFA Ranking and Preddiction Model
+Alternative FIFA Ranking and Prediction Model
 
 This repository presents an alternative model to determine FIFA rankings, then uses its capabilities to determine the history of team’s ELOs over time. The final capability is the prediction of matches between two teams at any given time. The dataset used is a complete history of every recorded FIFA sanctioned game since 1872. 
 
