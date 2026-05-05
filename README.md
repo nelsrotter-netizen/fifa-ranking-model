@@ -1,19 +1,20 @@
-Alternative FIFA Ranking and Prediction Model
-
+**Alternative FIFA Ranking and Prediction Model
+**
 This repository presents an alternative model to determine FIFA rankings, then uses its capabilities to determine the history of team’s ELOs over time. The final capability is the prediction of matches between two teams at any given time. The dataset used is a complete history of every recorded FIFA sanctioned game since 1872. 
+****It should be noted that I do not condone gambling and find sports betting to be a dangerous phenomenon in our currrent society. The point of this model is to see how easily one could find a way to game the system, especially considering that the current FIFA rankings are a significant determining factor in setting prediction markets. 
 
-Research Question: 
-Is there a better manner for ranking international teams apart from the traditional FIFA ranking system and is it more effective at predicting games than other AI modeling systems?
+**Research Question: 
+**Is there a better manner for ranking international teams apart from the traditional FIFA ranking system and is it more effective at predicting games than other AI modeling systems?
 
-Data Sources:
-This project sources data from a few different datasets:
-  1. dataset compiling every FIFA sanctioned match since 1872
-  2. second dataset contains games from 2022 WC specifically
-  3. third dataset has future games from the 2026 World Cup group stage
+**Data Sources:
+**This project sources data from a few different datasets:
+  1. dataset compiling every FIFA sanctioned match since 1872. This dataset was pulled from Kaggle but could also be pulled by web-scraping from the FIFA website, where there is a catalogue of every game ever played. The primary concern with the dataset is that some of the teams recorded currently do not exist, with some well-known examples being East Germany and Yugoslavia. I considered removing those who were not currently recognized, but my own curiosity at seeing historical rankings of defunct countries was too great to take that step. Some interesting examples were teams like Catalonia and Yugoslavia that had some high-performing eras. 
+  2. second dataset contains games from 2022 WC specifically. I had to go ahead and make a function to determine the winner of each game, which was compared to the predicted results from the updated ELO model.  
+  3. third dataset has future games from the 2026 World Cup group stage. This was essential in order for the Odds API to be called to find market odds for each upcoming group stage game. 
   4. API from the Odds API, can be used for free to pull betting odds from any competitive sports game; odds pulled are from UK markets only
 
-Scripts Used: 
-The repository consists of three separate scripts. 
+**Scripts Used: 
+**The repository consists of three separate scripts. 
 
 Script 1: 
 The first script initially reads the complete FIFA match dataset, altering the dates to be yearly and renaming some of the key column names to facilitate later analysis. It ensures that scores from matches are integers and then creates a new column called goal difference, a key feature of the newly developed ELO model. 
@@ -22,11 +23,13 @@ The first key function creates a new column to identify the winner for each game
 
 The ELO function itself is derived from one similar to chess, with a base value of 1000 and a K_Base of 1, meaning every match is initially given a value of 1. This value is then multiplied by the various weighted factors earlier calculated, including match weight, goal difference, a time decay factor, and a win probability factor determined based on each team’s ELO before the match. After considering all of these factors, the code can be run and give the user a ranking list of every team to compete in a FIFA sanctioned match. 
 
+The script then proceeds to develop a function to find a set of rankings at any given point in time, in this case in 2022. This developed ranking set will be used in the third script to see if the prediction model was well adapted in 2022 to predicting World Cup games. The same logic generally applies from the first update_elo function, except that it is flexible on the year input. 
+
 Script 2:
 The second script begins with a function predict_match, essentially just meaning that the team with the greater ELO at the match’s inception will win the match, with a probability given as to the validity of this result. A default dictionary function allows the user to view the collective history of every team at any given year or game. The plot_elo_history function then plots the history of any given team’s ELO over time, with the example of Senegal given in the script. 
 
 Script 3: 
-The final script demonstrates the predictive capacity of the ELO ranking model. The script imports a dataset with every group stage game from both the 2022 and upcoming 2026 World Cups, then making predictions on the outcomes from each game. For the 2022 WC, the predictions are compared to the actual results, whereas the 2026 WC is compared to AI predicted betting odds for each group stage game. 
+The final script demonstrates the predictive capacity of the ELO ranking model. The script imports a dataset with every group stage game from both the 2022 and upcoming 2026 World Cups, then making predictions on the outcomes from each game. For the 2022 WC, the predictions are compared to the actual results, whereas the 2026 WC is compared to AI predicted betting odds for each group stage game. These odds are pulled from the Odds API, a free-to-use API that collects betting market odds from various countries. The call that I used comes from the United Kingdom but it can be updated to find markets in whatever country the user chooses. 
 
 Notes: 
 The first script is intended to bring about a more accurate version of the FIFA rankings system. The FIFA rankings are used not only as a measure of the strength of teams competing in international soccer, but have several practical functions as well. They determine what teams are chosen in World Cup and regional competition groups, the status of play-in games for the World Cup, and are consistently used as a key metric in prediction and betting markets. Despite their issues, they are consistently important and hold weight in international competition. 
@@ -36,3 +39,6 @@ The first script uses a model similar to that of chess ELO systems, building on 
 The predict match function is one that can be adjusted by the user to account for the probability of draws, which can be achieved by setting a difference in ELO threshold that must be reached for one team to be deemed as having an advantage. In this model, however, the goal is to find games where betting markets are picking a favorite that is at odds with the updated model, a point at which current ranking systems are overvaluing the strengths of a given side. 
 
 The API that is used in the third script, called using the add_market_odds function, is a compilation of various UK betting odds aggregated amongst themselves to determine generally which team is favored. This API, of course, could be called in another country like the United States or France, but I used the example of the UK because betting markets are particularly strong in the soccer-crazed nation. 
+
+**Overall Findings**
+The ELO model generally produces rankings that are less favorable to teams in Europe and South America than we can currently view in the current FIFA World Rankings. This is intentional and achieved by weighting Asian and African competitions equal to those in Europe and South America, while also weighing qualification matches equally between confederations. 
