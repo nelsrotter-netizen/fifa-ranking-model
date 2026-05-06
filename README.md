@@ -22,7 +22,9 @@ To use the Odds API:
 **Scripts Used: 
 **The repository consists of three separate scripts. 
 
-Script 1: 
+It is important for the scripts to be run in order. The first script develops the ranking system allows for the future match prediction functions to be used correctly. 
+
+Script 1: infantino-level.py
 The first script initially reads the complete FIFA match dataset, altering the dates to be yearly and renaming some of the key column names to facilitate later analysis. It ensures that scores from matches are integers and then creates a new column called goal difference, a key feature of the newly developed ELO model. 
 
 The first key function creates a new column to identify the winner for each game and applies it to the larger data_file, which then allows one to view which teams historically have the most wins. A further function defines the weight of games, weighing the World Cup highest, followed by elite regional tournaments, qualification matches, lesser regional tournaments, and finally all other friendly games. Another function determines the weight of goal difference to be used, capping the goal difference at 3, meaning a team with a +3 goal difference will have their match weighted double. 
@@ -31,10 +33,10 @@ The ELO function itself is derived from one similar to chess, with a base value 
 
 The script then proceeds to develop a function to find a set of rankings at any given point in time, in this case in 2022. This developed ranking set will be used in the third script to see if the prediction model was well adapted in 2022 to predicting World Cup games. The same logic generally applies from the first update_elo function, except that it is flexible on the year input. 
 
-Script 2:
+Script 2: blatter.py
 The second script begins with a function predict_match, essentially just meaning that the team with the greater ELO at the match’s inception will win the match, with a probability given as to the validity of this result. A default dictionary function allows the user to view the collective history of every team at any given year or game. The plot_elo_history function then plots the history of any given team’s ELO over time, with the example of Senegal given in the script. 
 
-Script 3: 
+Script 3: platini.py
 The final script demonstrates the predictive capacity of the ELO ranking model. The script imports a dataset with every group stage game from both the 2022 and upcoming 2026 World Cups, then making predictions on the outcomes from each game. For the 2022 WC, the predictions are compared to the actual results, whereas the 2026 WC is compared to AI predicted betting odds for each group stage game. These odds are pulled from the Odds API, a free-to-use API that collects betting market odds from various countries. The call that I used comes from the United Kingdom but it can be updated to find markets in whatever country the user chooses. The final portion of the script calculates how accurate the model would have been at predicting 2022 World Cup games. 
 
 Notes: 
