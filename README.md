@@ -22,7 +22,7 @@ To use the Odds API:
 **Scripts Used: 
 **The repository consists of three separate scripts. 
 
-It is important for the scripts to be run in order. The first script develops the ranking system allows for the future match prediction functions to be used correctly. 
+It is important for the scripts to be run in order. The first script develops the ranking system allows for the future match prediction functions to be used correctly. Make sure to run them all in the same spyder program. 
 
 Script 1: infantino-level.py
 The first script initially reads the complete FIFA match dataset, altering the dates to be yearly and renaming some of the key column names to facilitate later analysis. It ensures that scores from matches are integers and then creates a new column called goal difference, a key feature of the newly developed ELO model. 
