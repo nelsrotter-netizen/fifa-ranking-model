@@ -14,6 +14,11 @@ This repository presents an alternative model to determine FIFA rankings, then u
   3. third dataset has future games from the 2026 World Cup group stage. This was essential in order for the Odds API to be called to find market odds for each upcoming group stage game. 
   4. API from the Odds API, can be used for free to pull betting odds from any competitive sports game; odds pulled are from UK markets only
 
+To use the Odds API:
+1. Sign up for a free key at https://the-odds-api.com
+2. Create a file called api_key.txt in the same folder as the scripts
+3. Paste your API key into that file and save
+
 **Scripts Used: 
 **The repository consists of three separate scripts. 
 
